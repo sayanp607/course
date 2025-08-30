@@ -7,7 +7,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Shared API base URL
-export const API_BASE_URL = "https://course-xom3.onrender.com";
+export const API_BASE_URL = "http://localhost:5000";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>

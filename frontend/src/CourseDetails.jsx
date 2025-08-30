@@ -39,27 +39,23 @@ function CourseDetails() {
       );
       setCourseName(found ? found.name : "Course");
     });
-    axios
-      .get(`${API_BASE_URL}/api/subsections/${courseId}`)
-      .then((res) => {
-        setSubsections(res.data.subsections);
-        if (res.data.subsections.length > 0)
-          setActive(res.data.subsections[0].id);
-        // Flatten all videos in all subsections
-        const videos = [];
-        res.data.subsections.forEach((sub) => {
-          if (sub.videos && sub.videos.length > 0) {
-            sub.videos.forEach((v) => videos.push({ ...v, subsection: sub }));
-          }
-        });
-        setAllVideos(videos);
-        setCurrentItem({ type: "video", idx: 0 });
+    axios.get(`${API_BASE_URL}/api/subsections/${courseId}`).then((res) => {
+      setSubsections(res.data.subsections);
+      if (res.data.subsections.length > 0)
+        setActive(res.data.subsections[0].id);
+      // Flatten all videos in all subsections
+      const videos = [];
+      res.data.subsections.forEach((sub) => {
+        if (sub.videos && sub.videos.length > 0) {
+          sub.videos.forEach((v) => videos.push({ ...v, subsection: sub }));
+        }
       });
+      setAllVideos(videos);
+      setCurrentItem({ type: "video", idx: 0 });
+    });
     // Fetch completed videos from backend
     axios
-      .get(
-        `${API_BASE_URL}/api/progress?userId=${userId}&courseId=${courseId}`
-      )
+      .get(`${API_BASE_URL}/api/progress?userId=${userId}&courseId=${courseId}`)
       .then((res) => {
         setCompletedVideos(res.data.completed || []);
       });
@@ -596,14 +592,11 @@ function CourseDetails() {
                 <CompleteButton
                   currentVideo={currentVideo}
                   onComplete={async () => {
-                    await axios.post(
-                      `${API_BASE_URL}/api/progress/complete`,
-                      {
-                        userId,
-                        courseId,
-                        videoId: currentVideo.id,
-                      }
-                    );
+                    await axios.post(`${API_BASE_URL}/api/progress/complete`, {
+                      userId,
+                      courseId,
+                      videoId: currentVideo.id,
+                    });
                     setCompletedVideos((prev) => [...prev, currentVideo.id]);
                     setJustCompletedId(currentVideo.id);
                     setShowAlert(true);
@@ -618,14 +611,11 @@ function CourseDetails() {
                   <button
                     className="button"
                     onClick={async () => {
-                      await axios.post(
-                        `${API_BASE_URL}/api/progress/undo`,
-                        {
-                          userId,
-                          courseId,
-                          videoId: currentVideo.id,
-                        }
-                      );
+                      await axios.post(`${API_BASE_URL}/api/progress/undo`, {
+                        userId,
+                        courseId,
+                        videoId: currentVideo.id,
+                      });
                       setCompletedVideos((prev) =>
                         prev.filter((vid) => vid !== currentVideo.id)
                       );
@@ -706,24 +696,6 @@ function CourseDetails() {
               </button>
             </div>
           </div>
-          {currentItem.type === "text" && currentText && (
-            <div>
-              <div
-                style={{
-                  fontWeight: "bold",
-                  fontSize: 18,
-                  marginBottom: 8,
-                }}
-              >
-                Text Content
-              </div>
-              <div
-                style={{ color: "#333", fontSize: 16, whiteSpace: "pre-line" }}
-              >
-                {currentText.content}
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </div>
