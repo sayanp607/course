@@ -14,6 +14,8 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true
 }));
+// Handle CORS preflight requests for all routes
+app.options('*', cors());
 app.use(bodyParser.json());
 // Serve static files from uploads folder
 app.use('/uploads', express.static(require('path').join(__dirname, 'uploads')));
