@@ -1,0 +1,68 @@
+/* Orange and Light Green Theme */
+:root {
+  --primary-orange: #728662;
+  --primary-green: #8bc34a;
+  --background: #c7f3c0;
+  --text-dark: #222;
+  --sidebar-bg: #fffde7;
+  --active-section: #ffe0b2;
+}
+
+body {
+  background: var(--background);
+  color: var(--text-dark);
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.header {
+  background: var(--primary-orange);
+  color: rgb(11, 1, 1);
+  padding: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.sidebar {
+  background: var(--sidebar-bg);
+  border-right: 2px solid var(--primary-green);
+  min-width: 220px;
+  padding: 1rem 0.5rem;
+}
+
+.sidebar .section {
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.sidebar .section.active {
+  background: var(--active-section);
+  color: var(--primary-orange);
+  font-weight: bold;
+}
+
+.content {
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  min-height: 300px;
+}
+
+.button {
+  background: var(--primary-green);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background 0.2s;
+}
+
+.button:hover {
+  background: #689f38;
+}

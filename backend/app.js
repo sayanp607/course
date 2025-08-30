@@ -1,0 +1,29 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
+const authRoutes = require('./routes/auth');
+const courseRoutes = require('./routes/course');
+const subsectionRoutes = require('./routes/subsection');
+const progressRoutes = require('./routes/progress');
+
+
+const app = express();
+app.use(cors());
+app.use(bodyParser.json());
+// Serve static files from uploads folder
+app.use('/uploads', express.static(require('path').join(__dirname, 'uploads')));
+
+app.use('/api/auth', authRoutes);
+app.use('/api/courses', courseRoutes);
+app.use('/api/subsections', subsectionRoutes);
+app.use('/api/progress', progressRoutes);
+
+app.get('/', (req, res) => {
+  res.send('Course system backend is running');
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
