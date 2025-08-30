@@ -9,7 +9,7 @@ const progressRoutes = require('./routes/progress');
 
 
 const app = express();
-app.use(cors({ origin: 'https://course-eight-iota.vercel.app/' }));
+app.use(cors({ origin: 'https://course-eight-iota.vercel.app' }));
 app.use(bodyParser.json());
 // Serve static files from uploads folder
 app.use('/uploads', express.static(require('path').join(__dirname, 'uploads')));
