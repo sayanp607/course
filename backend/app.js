@@ -10,7 +10,10 @@ const progressRoutes = require('./routes/progress');
 
 const app = express();
 app.use(cors({
-  origin: 'https://course-eight-iota.vercel.app',
+  origin: [
+    'https://course-eight-iota.vercel.app',
+    'https://course-p795qqh8j-sayan-pauls-projects-8716183d.vercel.app'
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true
 }));
